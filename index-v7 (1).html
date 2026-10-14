@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FAF9F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1F1E1D" media="(prefers-color-scheme: dark)">
+<title>釉藥配比換算</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://glaze-proxy.forest31345.workers.dev" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Shippori+Mincho+B1:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF9F5; --bg-2:#F0EEE6; --line:#E3DFD5; --line-strong:#CFCABE;
+  --ink:#141413; --ink-2:#5E5D59; --on-ink:#FAF9F5;
+  --clay:#D97757; --clay-ink:#B4532F; --clay-tint:rgba(217,119,87,.12);
+  --bleed:0 0 .6px rgba(20,20,19,.55);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .08 0 0 0 0 .08 0 0 0 0 .07 0 0 0 .09 -.02'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+  --serif:"Noto Serif TC","Songti TC","Noto Serif CJK TC","PMingLiU",serif;
+  --display:"Shippori Mincho B1","Noto Serif TC","Songti TC","Noto Serif CJK TC",serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1F1E1D; --bg-2:#2A2927; --line:#393835; --line-strong:#4B4A45;
+    --ink:#F4F2EC; --ink-2:#A8A69F; --on-ink:#1F1E1D;
+    --clay-ink:#E58B6D; --clay-tint:rgba(217,119,87,.16);
+    --bleed:0 0 .6px rgba(244,242,236,.4);
+    --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .95 0 0 0 0 .94 0 0 0 0 .9 0 0 0 .06 -.015'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1F1E1D; --bg-2:#2A2927; --line:#393835; --line-strong:#4B4A45;
+  --ink:#F4F2EC; --ink-2:#A8A69F; --on-ink:#1F1E1D;
+  --clay-ink:#E58B6D; --clay-tint:rgba(217,119,87,.16);
+  --bleed:0 0 .6px rgba(244,242,236,.4);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .95 0 0 0 0 .94 0 0 0 0 .9 0 0 0 .06 -.015'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-padding-top:env(safe-area-inset-top,0px); -webkit-text-size-adjust:100%}
+html,body{margin:0}
+body{
+  background-color:var(--bg); background-image:var(--grain);
+  color:var(--ink); font-family:var(--serif);
+  font-size:17px; line-height:1.8; letter-spacing:.02em;
+}
+main{max-width:760px; margin:0 auto; padding:28px 20px 80px}
+
+/* ---------- hero ---------- */
+.hero{display:grid; gap:24px; margin-bottom:12px}
+.art{background:#D97757; border-radius:16px; aspect-ratio:16/7; overflow:hidden}
+.art svg{display:block; width:100%; height:100%}
+h1{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(2.2rem, 1.4rem + 3.4vw, 3.3rem); line-height:1.15;
+  letter-spacing:.06em; margin:0 0 14px; text-shadow:var(--bleed);
+}
+h1 span{display:inline-block; transform:translateY(var(--y,0)) rotate(var(--r,0deg)); opacity:var(--o,1)}
+.lede{color:var(--ink-2); margin:0; max-width:31em}
+@media (min-width:640px){
+  .hero{grid-template-columns:minmax(0,1fr) 216px; align-items:end; gap:36px}
+  .art{aspect-ratio:1/1; order:2}
+}
+
+/* ---------- sections ---------- */
+section{border-top:1px solid var(--line); margin-top:40px; padding-top:28px}
+h2{font-family:var(--display); font-weight:700; font-size:1.35rem; letter-spacing:.08em; margin:0 0 18px; text-shadow:var(--bleed)}
+
+button{
+  font:inherit; font-size:.95rem; letter-spacing:.04em; line-height:1.4;
+  color:var(--ink); background:transparent;
+  border:1px solid var(--line-strong); border-radius:10px;
+  padding:8px 16px; cursor:pointer;
+}
+button.primary{background:var(--ink); color:var(--on-ink); border-color:var(--ink)}
+button:disabled{opacity:.4; cursor:default}
+:focus-visible{outline:2px solid var(--clay); outline-offset:2px}
+select,textarea,input{font:inherit; color:var(--ink)}
+select{background:var(--bg-2); border:1px solid var(--line); border-radius:8px; padding:4px 8px; font-size:.95rem; max-width:100%}
+.actions{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* ---------- reading ---------- */
+.drop{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+  width:100%; min-height:156px; padding:20px;
+  background:var(--bg-2); border:1px dashed var(--line-strong); border-radius:14px;
+  color:var(--ink-2); text-align:center; font-size:.95rem;
+}
+.drop strong{color:var(--ink); font-weight:600; font-size:1.1rem}
+.drop.over{border-color:var(--clay); background:var(--clay-tint)}
+.loaded-top{display:flex; align-items:center; gap:16px}
+.thumb{
+  position:relative; flex:0 0 auto; width:80px; height:80px; padding:0;
+  border:1px solid var(--line-strong); border-radius:10px; overflow:hidden;
+  background:var(--bg-2); cursor:zoom-in;
+}
+.thumb img{display:block; width:100%; height:100%; object-fit:cover}
+.mark{position:absolute; border:1.5px solid #D97757; background:rgba(217,119,87,.2); pointer-events:none}
+.loaded-info{flex:1; min-width:0}
+.bar{position:relative; height:4px; border-radius:2px; background:var(--line); overflow:hidden}
+.fill{position:absolute; inset:0; background:var(--clay); transform:scaleX(0); transform-origin:left center; transition:transform .25s ease-out}
+.fill::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:sheen 1.3s ease-in-out infinite;
+}
+@keyframes sheen{from{transform:translateX(-100%)} to{transform:translateX(100%)}}
+.status{margin:0; font-size:.95rem; line-height:1.65; color:var(--ink-2)}
+.status:empty{display:none}
+.status.error{color:var(--clay-ink)}
+#status0{margin-top:12px}
+.settings{display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; margin-top:18px; font-size:.95rem; color:var(--ink-2)}
+.settings label{display:flex; align-items:center; gap:8px}
+input[type=checkbox]{width:18px; height:18px; margin:0; accent-color:var(--clay)}
+details{margin-top:14px}
+summary{cursor:pointer; color:var(--ink-2); font-size:.95rem}
+textarea{
+  display:block; width:100%; min-height:150px; margin-top:10px; padding:10px 12px;
+  background:var(--bg-2); border:1px solid var(--line); border-radius:10px;
+  font-size:.95rem; line-height:1.7; resize:vertical;
+}
+
+/* ---------- viewer / crop ---------- */
+.viewer{
+  position:fixed; inset:0; z-index:20; display:flex; flex-direction:column;
+  background:#141413; color:#FAF9F5;
+  padding:calc(env(safe-area-inset-top,0px) + 12px) 14px calc(env(safe-area-inset-bottom,0px) + 14px);
+}
+.viewer-top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px}
+.viewer-top p{margin:0; font-size:.95rem; line-height:1.5; color:#DAD7CD}
+.viewer-top button{flex:0 0 auto; white-space:nowrap}
+.stage{flex:1; min-height:0; display:flex; align-items:center; justify-content:center; touch-action:none; -webkit-user-select:none; user-select:none; cursor:crosshair}
+.imgwrap{position:relative; overflow:hidden; line-height:0}
+.imgwrap img{
+  display:block; max-width:100%;
+  max-height:calc(100vh - 150px);
+  max-height:calc(100dvh - 150px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+  -webkit-user-drag:none; pointer-events:none;
+}
+.sel{position:absolute; border:2px solid #D97757; background:rgba(217,119,87,.12); box-shadow:0 0 0 100vmax rgba(20,20,19,.5); pointer-events:none}
+.viewer-actions{display:flex; justify-content:flex-end; flex-wrap:wrap; gap:10px; margin-top:12px}
+.viewer button{color:#FAF9F5; border-color:rgba(250,249,245,.35)}
+.viewer button.primary{background:#FAF9F5; color:#141413; border-color:#FAF9F5}
+
+/* ---------- calculator ---------- */
+.lbl{display:block; color:var(--ink-2); font-size:.95rem; margin-bottom:2px}
+.readout{display:flex; align-items:baseline; gap:10px; border-bottom:2px solid var(--ink); margin-bottom:14px}
+.readout input{
+  font-family:var(--display); font-weight:700; font-size:4rem; line-height:1.1;
+  width:3.4ch; min-width:2.4ch; padding:0; border:0; background:transparent; text-shadow:var(--bleed);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.readout input:focus-visible{outline:none; background:var(--clay-tint); border-radius:6px}
+.unit{font-family:var(--display); font-weight:700; font-size:1.8rem; color:var(--ink-2)}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chips button{padding:4px 16px; border-radius:999px; font-variant-numeric:lining-nums}
+.chips button[aria-pressed="true"]{background:var(--ink); color:var(--on-ink); border-color:var(--ink)}
+.opts{display:flex; flex-wrap:wrap; gap:10px 22px; margin:20px 0 10px; font-size:.95rem; color:var(--ink-2)}
+.opts label{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.tablewrap{overflow-x:auto}
+table{width:100%; border-collapse:collapse; font-size:.94rem}
+thead th{font-weight:400; font-size:.85rem; color:var(--ink-2); text-align:left; white-space:nowrap; padding:8px 4px 6px; border-bottom:1px solid var(--ink)}
+td,tfoot th{padding:6px 4px; border-bottom:1px solid var(--line); vertical-align:middle}
+tfoot th,tfoot td{border-top:1px solid var(--ink); border-bottom:0; padding-top:12px; font-weight:600; text-align:left}
+.r{text-align:right} .c{text-align:center}
+thead th.r,tfoot td.r{text-align:right}
+td input[type=text]{
+  width:100%; padding:5px 6px; border:0; border-radius:6px;
+  background:var(--bg-2); font-size:inherit;
+}
+td.c-name{min-width:7em}
+td.c-pct{width:3.6em} td.c-pct input{text-align:right; font-variant-numeric:tabular-nums}
+td.c-add{width:2.4em; text-align:center}
+td.g{width:4.6em; text-align:right; font-weight:600; white-space:nowrap; font-variant-numeric:tabular-nums}
+td.c-x{width:1.9em; text-align:right}
+td.c-x button{border:0; padding:2px 4px; font-size:1.2rem; line-height:1; color:var(--ink-2)}
+#sumPct,#sumAdd,#sumG{white-space:nowrap; font-variant-numeric:tabular-nums}
+tr.is-add td.c-name{box-shadow:inset 3px 0 0 var(--clay)}
+.warn{margin:10px 0 0; color:var(--clay-ink); font-size:.95rem}
+.warn:empty{display:none}
+.note{margin:16px 0 0; color:var(--ink-2); font-size:.9rem; line-height:1.7; max-width:36em}
+
+/* ---------- things that need a second look ---------- */
+td.unsure input[type=text]{background:var(--clay-tint); box-shadow:inset 0 -2px 0 var(--clay)}
+.recipes{margin-top:14px}
+.recipes button{max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.fine{margin:14px 0 0; font-size:.85rem; line-height:1.75; color:var(--ink-2); max-width:36em}
+.title-in{
+  display:block; width:100%; margin:0 0 26px; padding:2px 0 8px;
+  border:0; border-bottom:1px solid var(--line-strong); border-radius:0; background:transparent;
+  font-family:var(--display); font-weight:700; font-size:1.35rem; letter-spacing:.06em; text-shadow:var(--bleed);
+}
+.title-in::placeholder{font-family:var(--serif); font-weight:400; font-size:1rem; letter-spacing:.02em; color:var(--ink-2); opacity:.7; text-shadow:none}
+.title-in:focus-visible{outline:none; border-bottom-color:var(--clay)}
+
+/* ---------- weighing-sheet preview ---------- */
+.sheet-body{flex:1; min-height:0; overflow:auto; display:flex; justify-content:center; align-items:flex-start}
+.sheet-body img{display:block; max-width:100%; height:auto; border-radius:10px}
+a.btn{display:inline-flex; align-items:center; font-size:.95rem; letter-spacing:.04em; line-height:1.4; color:#FAF9F5; border:1px solid rgba(250,249,245,.35); border-radius:10px; padding:8px 16px; text-decoration:none}
+a.btn.primary{background:#FAF9F5; color:#141413; border-color:#FAF9F5}
+#status2{margin-top:10px}
+#copyBox{margin-top:18px}
+#copyText{min-height:0; resize:none; white-space:pre; overflow-x:auto; letter-spacing:0; font-variant-numeric:normal}
+
+@media (prefers-reduced-motion:reduce){
+  .fill{transition:none}
+  .fill::after{animation:none}
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="art" aria-hidden="true">
+      <svg viewBox="30 24 200 196" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="wobble" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="t"/>
+            <feDisplacementMap in="SourceGraphic" in2="t" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <clipPath id="bowlBody">
+            <path d="M50 118 A70 14 0 0 0 190 118 C188 160 156 184 120 184 C84 184 52 160 50 118 Z"/>
+          </clipPath>
+        </defs>
+        <g filter="url(#wobble)" stroke="#141413" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M62 199 H178" fill="none"/>
+          <path d="M100 183 L103 196 H137 L140 183" fill="#E3DACC"/>
+          <path d="M50 118 A70 14 0 0 0 190 118 C188 160 156 184 120 184 C84 184 52 160 50 118 Z" fill="#E3DACC"/>
+          <path clip-path="url(#bowlBody)" stroke="none" fill="#141413" d="M40 100 H200 V146 C192 148 186 144 180 147 C176 149 175 160 172 163 C169 166 166 160 166 152 C160 150 150 154 142 151 C138 150 137 166 133 170 C129 174 126 166 126 156 C118 152 108 157 98 153 C94 152 93 162 89 165 C85 168 82 160 82 152 C72 150 62 154 40 150 Z"/>
+          <path d="M50 118 C52 160 84 184 120 184 C156 184 188 160 190 118" fill="none"/>
+          <ellipse cx="120" cy="118" rx="70" ry="14" fill="#2B2926"/>
+          <path d="M66 113 Q120 101 174 113" fill="none" stroke="#FAF9F5" stroke-width="2" opacity=".55"/>
+          <path d="M149 60 C146 74 139 88 136 116" fill="none" stroke-width="6"/>
+          <g transform="rotate(-28 168 56)">
+            <path d="M186 50 H300" fill="none" stroke-width="4"/>
+            <path d="M150 50 C150 67 186 67 186 50 Z" fill="#FAF9F5"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <h1 aria-label="釉藥配比換算"><span aria-hidden="true" style="--r:-.4deg;--y:.6px;--o:.95">釉</span><span aria-hidden="true" style="--r:.5deg;--y:-.4px;--o:.9">藥</span><span aria-hidden="true" style="--r:-.2deg;--y:.3px">配</span><span aria-hidden="true" style="--r:.6deg;--y:.8px;--o:.88">比</span><span aria-hidden="true" style="--r:-.5deg;--y:-.2px;--o:.96">換</span><span aria-hidden="true" style="--r:.3deg;--y:.4px;--o:.92">算</span></h1>
+      <p class="lede">拍下筆記本或截圖，辨識出原料和百分比，再換算成這次要秤的公克數。</p>
+    </div>
+  </header>
+
+  <section id="read" aria-labelledby="h-read">
+    <h2 id="h-read">讀取配方</h2>
+    <button type="button" class="drop" id="drop">
+      <strong>拍照或選一張圖片</strong>
+      <span>手寫筆記、網頁截圖都可以，iPhone 的 HEIC 照片也能直接用</span>
+    </button>
+    <input type="file" id="file" accept="image/*,.heic,.heif" hidden>
+    <p class="status" id="status0" role="status" aria-live="polite"></p>
+
+    <div id="loaded" hidden>
+      <div class="loaded-top">
+        <button type="button" class="thumb" id="thumbBtn" aria-label="查看原圖">
+          <img id="thumb" alt="">
+          <span class="mark" id="mark" hidden></span>
+        </button>
+        <div class="loaded-info">
+          <div class="bar" id="bar" role="progressbar" aria-label="辨識進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div class="fill" id="fill"></div></div>
+          <p class="status" id="status1" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="chips recipes" id="picker" role="group" aria-label="這張圖裡的配方" hidden></div>
+      <div class="actions">
+        <button type="button" id="cropBtn">框選範圍</button>
+        <button type="button" id="rerun">重新辨識</button>
+        <button type="button" id="swap">換一張</button>
+      </div>
+    </div>
+
+    <p class="fine">照片會送到 Google 的 Gemini 辨識。這是免費服務，Google 可能用收到的內容改進自己的產品，也可能由人員審閱，拍照時請避開個人資料。</p>
+
+    <details id="rawBox">
+      <summary>貼上文字配方</summary>
+      <textarea id="raw" spellcheck="false" placeholder="也可以直接把配方文字貼在這裡，一行一種原料，例如：&#10;長石 45&#10;矽石 25&#10;碳酸鈣 20&#10;高嶺土 10&#10;+ 氧化鐵 5"></textarea>
+      <div class="actions"><button type="button" id="parseBtn">解析這段文字</button></div>
+    </details>
+  </section>
+
+  <section id="calc" aria-labelledby="h-calc">
+    <h2 id="h-calc">換算</h2>
+    <label class="lbl" for="title">配方名稱</label>
+    <input id="title" class="title-in" type="text" placeholder="可以不填，會印在秤料單上" autocomplete="off" maxlength="60">
+    <label class="lbl" for="target">這次要調多少</label>
+    <div class="readout">
+      <input id="target" type="text" inputmode="decimal" value="200" autocomplete="off">
+      <span class="unit">g</span>
+    </div>
+    <div class="chips" role="group" aria-label="常用重量">
+      <button type="button" data-g="100">100</button>
+      <button type="button" data-g="200">200</button>
+      <button type="button" data-g="400">400</button>
+      <button type="button" data-g="1000">1000</button>
+    </div>
+    <div class="opts">
+      <label>這個重量是
+        <select id="mode">
+          <option value="base">基礎釉的總重，外加的另外算</option>
+          <option value="all">所有原料加起來的總重</option>
+        </select>
+      </label>
+      <label>精度
+        <select id="dp">
+          <option value="1">0.1 g</option>
+          <option value="2">0.01 g</option>
+          <option value="0">1 g</option>
+        </select>
+      </label>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">原料</th><th scope="col" class="r">%</th><th scope="col" class="c">外加</th><th scope="col" class="r">要秤 g</th><th scope="col"><span class="sr">刪除</span></th></tr></thead>
+        <tbody id="rows"></tbody>
+        <tfoot><tr><th scope="row">合計</th><td class="r" id="sumPct"></td><td class="c" id="sumAdd"></td><td class="r" id="sumG"></td><td></td></tr></tfoot>
+      </table>
+    </div>
+    <datalist id="materials"><option value="長石"><option value="鉀長石"><option value="鈉長石"><option value="霞石正長岩"><option value="矽石"><option value="石英"><option value="高嶺土"><option value="球土"><option value="碳酸鈣"><option value="石灰石"><option value="白雲石"><option value="滑石"><option value="矽灰石"><option value="碳酸鋇"><option value="碳酸鎂"><option value="碳酸鍶"><option value="碳酸鋰"><option value="鋰輝石"><option value="氧化鋅"><option value="硼砂"><option value="熔塊"><option value="骨灰"><option value="木灰"><option value="稻殼灰"><option value="膨潤土"><option value="氧化鐵"><option value="紅色氧化鐵"><option value="黑色氧化鐵"><option value="氧化鈷"><option value="碳酸鈷"><option value="氧化銅"><option value="碳酸銅"><option value="氧化錫"><option value="氧化鋯"><option value="矽酸鋯"><option value="氧化鈦"><option value="金紅石"><option value="氧化鉻"><option value="二氧化錳"><option value="氧化鎳"><option value="釉果"><option value="Custer Feldspar"><option value="Minspar 200"><option value="G-200 Feldspar"><option value="Nepheline Syenite"><option value="Silica"><option value="Kaolin"><option value="EPK"><option value="Ball Clay"><option value="OM4 Ball Clay"><option value="Whiting"><option value="Dolomite"><option value="Talc"><option value="Wollastonite"><option value="Frit 3134"><option value="Frit 3124"><option value="Frit 3195"><option value="Gerstley Borate"><option value="Zinc Oxide"><option value="Strontium Carbonate"><option value="Barium Carbonate"><option value="Lithium Carbonate"><option value="Spodumene"><option value="Magnesium Carbonate"><option value="Bone Ash"><option value="Bentonite"><option value="Red Iron Oxide"><option value="Cobalt Carbonate"><option value="Cobalt Oxide"><option value="Copper Carbonate"><option value="Tin Oxide"><option value="Zircopax"><option value="Rutile"><option value="Titanium Dioxide"><option value="Chrome Oxide"><option value="Manganese Dioxide"></datalist>
+    <p class="warn" id="warn" aria-live="polite"></p>
+    <div class="actions">
+      <button type="button" id="addRow">新增原料</button>
+      <button type="button" class="primary" id="saveBtn">存成圖片</button>
+      <button type="button" id="clearBtn">全部清空</button>
+    </div>
+    <details id="copyBox">
+      <summary>文字版秤料單</summary>
+      <textarea id="copyText" readonly spellcheck="false" wrap="off" aria-label="文字版秤料單" placeholder="表格裡還沒有可以複製的原料。"></textarea>
+      <div class="actions"><button type="button" id="copyBtn">複製</button></div>
+    </details>
+    <p class="status" id="status2" role="status" aria-live="polite"></p>
+    <p class="note">橘色是看不太清楚的地方，請點上方的縮圖對照原圖，直接在表格裡修改。行首有「+」或寫在「添加」「合計」下面的原料，會自動標成外加；基礎釉加總不是 100 時，會按比例換算。</p>
+  </section>
+</main>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="vTitle" hidden>
+  <div class="viewer-top">
+    <p id="vTitle">可以對照原圖；拖曳框出配方的範圍，旁邊的文字就不會被讀進來</p>
+    <button type="button" id="vClose">關閉</button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="imgwrap"><img id="vImg" alt="原圖" draggable="false"><div class="sel" id="sel" hidden></div></div>
+  </div>
+  <div class="viewer-actions">
+    <button type="button" id="vClear">清除框選</button>
+    <button type="button" class="primary" id="vRun">辨識框選範圍</button>
+  </div>
+</div>
+
+<div class="viewer" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sTitle" hidden>
+  <div class="viewer-top">
+    <p id="sTitle">秤料單。iPhone 也可以長按圖片，選「加入照片」</p>
+    <button type="button" id="sClose">關閉</button>
+  </div>
+  <div class="sheet-body"><img id="sImg" alt="秤料單"></div>
+  <div class="viewer-actions">
+    <a class="btn" id="sDownload" href="#" download>下載</a>
+    <button type="button" class="primary" id="sShare">分享或儲存</button>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const clamp01 = v => Math.min(1, Math.max(0, v));
+const frame = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+const pad2 = n => String(n).padStart(2, '0');
+
+/* ================= parser (pure, no DOM) ================= */
+// PARSER-START
+const LETTER_RE = /[A-Za-z\u3400-\u9fff]/;
+const TOTAL_RE = /^(total|sum|合計|總計|小計|總和|共計)$/i;
+const ADD_HEAD_RE = /^(添加物?|外加物?|附加|著色劑|乳濁劑|additions?|adds?|colou?rants?|extras?)$/i;
+const ADD_PREFIX_RE = /^(add|添加|外加)\s*:\s*/i;
+const SKIP_RE = /(cone|℃|°|溫度|燒成|氧化焰|還原焰|氧化燒|還原燒|kiln|firing|atmosphere|transparency|glazy|\bUMF\b|\bLOI\b|expansion|膨脹)/i;
+const HEADER_RE = /^(material|materials|amount|amounts|原料|材料|名稱|比例|百分比|重量|%)(\s+(material|materials|amount|amounts|原料|材料|名稱|比例|百分比|重量|%))*$/i;
+const NUM_TOKEN = '[0-9OoIl|]*[0-9][0-9OoIl|]*(?:[.,][0-9OoIl|]+)?';
+const LINE_RE = new RegExp('^(.*?)(' + NUM_TOKEN + ')\\s*(?:%|g|G|克|公克|份)?\\s*\\)?\\s*$');
+const PCT_G_RE = new RegExp('^(.*?)(' + NUM_TOKEN + ')\\s*%\\s+' + NUM_TOKEN + '\\s*(?:g|G|克|公克)\\s*$');
+const NUM_ONLY_RE = new RegExp('^\\s*(' + NUM_TOKEN + ')\\s*(?:%|g|G|克|公克|份)?\\s*$');
+
+function normalizeText(s){
+  return String(s)
+    .replace(/[\uFF01-\uFF5E]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0xFEE0))
+    .replace(/\u3000/g, ' ').replace(/[。｡]/g, '.').replace(/\t/g, ' ');
+}
+function toNumber(tok){
+  let t = tok.replace(/[Oo]/g, '0').replace(/[Il|]/g, '1');
+  t = t.includes('.') ? t.replace(/,/g, '') : t.replace(',', '.');
+  return parseFloat(t);
+}
+function cleanName(s){
+  return s
+    .replace(/^\s*(?:\(?\d{1,2}[.)、]|[\u2460-\u2473]|[•·*\-–—])\s*/, '')
+    .replace(/^[\s+]+/, '')
+    .replace(/([\u3400-\u9fff])\s+(?=[\u3400-\u9fff])/g, '$1')
+    .replace(/[\s:=\-–—_.|,、…]+$/, '')
+    .replace(/\s+\d+[.,]\d+$/, '')
+    .replace(/[\s:=\-–—_.|,、…]+$/, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+const DATE_RE = /\d{4}\s*[-/.年]\s*\d{1,2}\s*[-/.月]\s*\d{1,2}|\d{1,2}\s*[/-]\s*\d{1,2}\s*[/-]\s*\d{2,4}/;
+const STOP_RE = /^(analysis|umf|unity formula|oxides?|oxide analysis|percent analysis|chemical analysis|化學分析|成分分析|分析|氧化物分析)$/i;
+const skipLine = s => SKIP_RE.test(s) || DATE_RE.test(s);
+function validItem(s){
+  const m = s.match(LINE_RE);
+  if (!m) return false;
+  const pct = toNumber(m[2]);
+  return LETTER_RE.test(cleanName(m[1])) && pct > 0 && pct <= 100;
+}
+// A wide gap (3+ spaces) usually means another column. Keep "name ... number" pairs,
+// drop stray columns such as dates or notes written beside the recipe.
+function segments(line){
+  const own = line.match(PCT_G_RE);
+  if (own && LETTER_RE.test(cleanName(own[1]))) return [line];
+  const segs = line.split(/\s{3,}/).map(s => s.trim()).filter(Boolean);
+  if (segs.length < 2) return [line];
+  const out = [];
+  let pending = null;
+  for (const s of segs){
+    if (skipLine(s)) { pending = null; continue; }
+    if (NUM_ONLY_RE.test(s)) { if (pending !== null) { out.push(pending + ' ' + s); pending = null; } continue; }
+    if (pending !== null) out.push(pending);
+    if (validItem(s)) { out.push(s); pending = null; }
+    else pending = LETTER_RE.test(s) ? s : null;
+  }
+  if (pending !== null) out.push(pending);
+  return out;
+}
+function parseRecipe(text){
+  const lines = normalizeText(text).split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const items = [];
+  let inAdd = false;
+  outer:
+  for (const raw of lines){
+    for (let line of segments(raw)){
+      if (skipLine(line)) continue;
+      const bare = cleanName(line.replace(/:\s*$/, ''));
+      if (STOP_RE.test(bare)) break outer;
+      if (ADD_HEAD_RE.test(bare)) { inAdd = true; continue; }
+      if (HEADER_RE.test(bare)) continue;
+      let add = inAdd || /^\s*\+/.test(line);
+      if (ADD_PREFIX_RE.test(line)) { line = line.replace(ADD_PREFIX_RE, ''); add = true; }
+      const m = line.match(PCT_G_RE) || line.match(LINE_RE);
+      if (!m) continue;
+      let name = cleanName(m[1]);
+      if (TOTAL_RE.test(name)) { inAdd = true; continue; }
+      if (/外加|添加/.test(name)) { add = true; name = cleanName(name.replace(/[(（]?(外加|添加)[)）]?/g, ' ')); }
+      const pct = toNumber(m[2]);
+      if (!name || !LETTER_RE.test(name) || name.length > 40) continue;
+      if (!(pct > 0 && pct <= 100)) continue;
+      items.push({ name, pct, add });
+    }
+  }
+  if (items.length >= 2) return items;
+
+  // Fallback: OCR split the table into a column of names and a column of numbers.
+  const names = [], nums = [];
+  let addZone = false;
+  for (const line of lines){
+    if (skipLine(line)) continue;
+    if (STOP_RE.test(cleanName(line))) break;
+    const nm = line.match(NUM_ONLY_RE);
+    if (nm) { nums.push(toNumber(nm[1])); continue; }
+    const name = cleanName(line);
+    if (!name || !LETTER_RE.test(name) || HEADER_RE.test(name)) continue;
+    if (ADD_HEAD_RE.test(name)) { addZone = true; continue; }
+    names.push({ name, add: addZone || /^\s*\+/.test(line), total: TOTAL_RE.test(name) });
+  }
+  if (names.length >= 2 && names.length === nums.length){
+    const out = [];
+    let afterTotal = false;
+    names.forEach((n, i) => {
+      if (n.total) { afterTotal = true; return; }
+      const pct = nums[i];
+      if (pct > 0 && pct <= 100) out.push({ name: n.name, pct, add: n.add || afterTotal });
+    });
+    if (out.length >= items.length) return out;
+  }
+  return items;
+}
+// PARSER-END
+
+/* ================= refs ================= */
+const dropBtn = $('#drop'), fileIn = $('#file'), loadedEl = $('#loaded');
+const thumbBtn = $('#thumbBtn'), thumbImg = $('#thumb'), markEl = $('#mark');
+const bar = $('#bar'), fill = $('#fill'), status0 = $('#status0'), status1 = $('#status1');
+const cropBtn = $('#cropBtn'), rerunBtn = $('#rerun'), swapBtn = $('#swap');
+const rawBox = $('#rawBox'), rawTa = $('#raw'), parseBtn = $('#parseBtn'), pickerEl = $('#picker'), titleIn = $('#title');
+const viewer = $('#viewer'), stage = $('#stage'), vImg = $('#vImg'), selEl = $('#sel');
+const vClose = $('#vClose'), vClear = $('#vClear'), vRun = $('#vRun');
+const targetIn = $('#target'), modeSel = $('#mode'), dpSel = $('#dp'), rowsEl = $('#rows');
+const sumPct = $('#sumPct'), sumAdd = $('#sumAdd'), sumG = $('#sumG'), warnEl = $('#warn');
+const chips = [...document.querySelectorAll('.chips button')];
+
+let srcImg = null, srcUrl = null, sel = null, busy = false;
+
+function setStatus(msg, isError){
+  const target = loadedEl.hidden ? status0 : status1;
+  const other = target === status0 ? status1 : status0;
+  other.textContent = ''; other.classList.remove('error');
+  target.textContent = msg || '';
+  target.classList.toggle('error', !!isError);
+}
+function setBusy(on){
+  busy = on;
+  [dropBtn, cropBtn, rerunBtn, swapBtn, parseBtn].forEach(b => { b.disabled = on; });
+  vRun.disabled = on || !sel;
+  $('#read').setAttribute('aria-busy', String(on));
+}
+
+
+/* ================= progress bar (one bar, no label) ================= */
+const P = {
+  v: 0, ceil: 0, rate: .05, active: false, iv: 0, hideT: 0,
+  reset(){ this.v = 0; this.ceil = 0; this.rate = .05; this.draw(); },
+  begin(){
+    clearTimeout(this.hideT);
+    this.active = true; bar.hidden = false;
+    clearInterval(this.iv); this.iv = setInterval(() => this.tick(), 100);
+    this.draw();
+  },
+  range(from, to, p, rate){
+    const nv = from + (to - from) * clamp01(p || 0);
+    if (nv > this.v) this.v = nv;
+    if (to >= this.ceil) { this.ceil = to; if (rate) this.rate = rate; }
+    this.draw();
+  },
+  tick(){
+    const room = this.ceil * .985 - this.v;
+    if (room > .0005) { this.v += room * this.rate; this.draw(); }
+  },
+  finish(){
+    clearInterval(this.iv); this.v = 1; this.draw(); this.active = false;
+    this.hideT = setTimeout(() => { bar.hidden = true; this.reset(); }, 450);
+  },
+  fail(){ clearInterval(this.iv); this.active = false; bar.hidden = true; this.reset(); },
+  draw(){
+    fill.style.transform = 'scaleX(' + this.v.toFixed(4) + ')';
+    bar.setAttribute('aria-valuenow', String(Math.round(this.v * 100)));
+  }
+};
+
+/* ================= recognition: Gemini, through our Cloudflare relay ================= */
+// The relay keeps the Gemini key and the reading instructions; this page only sends the picture.
+const PROXY = 'https://glaze-proxy.forest31345.workers.dev';
+const MAX_SIDE = 2048;
+let recipes = [], recipeIdx = 0;
+
+function startBar(){ if (P.active) return; P.reset(); P.begin(); P.range(0, .02, 1); }
+
+function deviceId(){
+  const K = 'glaze-device';
+  try {
+    let id = localStorage.getItem(K);
+    if (!id || !/^[A-Za-z0-9_-]{8,64}$/.test(id)){
+      id = (window.crypto && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 12)).replace(/[^A-Za-z0-9_-]/g, '');
+      localStorage.setItem(K, id);
+    }
+    return id;
+  } catch (e){ return 'tmp' + Math.random().toString(36).slice(2, 14); }
+}
+
+// Cut the chosen area, shrink big photos, and turn it into a JPEG for sending.
+function prepImage(img, f){
+  const W = img.naturalWidth, H = img.naturalHeight;
+  const sx = f ? f.x * W : 0, sy = f ? f.y * H : 0;
+  const sw = Math.max(1, f ? f.w * W : W), sh = Math.max(1, f ? f.h * H : H);
+  const long = Math.max(sw, sh);
+  const k = long > MAX_SIDE ? MAX_SIDE / long : long < 1000 ? Math.min(2, 1000 / long) : 1;
+  const c = document.createElement('canvas');
+  c.width = Math.max(1, Math.round(sw * k)); c.height = Math.max(1, Math.round(sh * k));
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, c.width, c.height);
+  let b64 = '';
+  for (let q = .88; q > .4; q -= .15){
+    b64 = (c.toDataURL('image/jpeg', q).split(',')[1]) || '';
+    if (b64.length < 4e6) break;
+  }
+  if (!b64) throw new Error('bad_image');
+  return b64;
+}
+
+async function askGemini(b64){
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 100000);
+  let res, data = null;
+  try {
+    res = await fetch(PROXY + '/?d=' + encodeURIComponent(deviceId()) + '&m=jpeg', { method: 'POST', body: b64, signal: ctrl.signal });
+    try { data = await res.json(); } catch (e) {}
+  } catch (e){
+    throw new Error(e && e.name === 'AbortError' ? 'timeout' : 'network');
+  } finally { clearTimeout(timer); }
+  if (!data) throw new Error('upstream');
+  if (!data.ok){ const err = new Error(String(data.error || 'upstream')); err.info = data; throw err; }
+  return data;
+}
+
+function whenText(iso){
+  const d = new Date(iso);
+  if (!iso || isNaN(d)) return '明天';
+  const now = new Date(), tmr = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const same = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  const day = same(d, now) ? '今天' : same(d, tmr) ? '明天' : (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
+  const h = d.getHours();
+  return day + (h < 12 ? '上午 ' : '下午 ') + (h % 12 || 12) + ':' + pad2(d.getMinutes());
+}
+function errorText(err){
+  const code = String(err && err.message || err), info = (err && err.info) || {};
+  const typeIt = '現在可以先用下面的「貼上文字配方」，或直接在表格輸入。';
+  switch (code){
+    case 'quota_day': return '今天的免費辨識次數用完了，' + whenText(info.retryAt) + ' 恢復。' + typeIt;
+    case 'device_limit': return '這支手機今天的辨識次數用完了，' + whenText(info.retryAt) + ' 恢復。' + typeIt;
+    case 'quota_minute': return '現在用的人比較多，請等 ' + (info.retryAfter || 60) + ' 秒再按「重新辨識」。';
+    case 'busy': case 'timeout': return '辨識服務暫時忙不過來，請稍後再按「重新辨識」。';
+    case 'bad_image': case 'blocked': return '這張圖片沒辦法辨識，請換一張試試。';
+    case 'config': return '辨識服務的設定有問題' + (info.detail ? '（' + info.detail + '）' : '') + '，請通知網頁管理者。';
+    case 'network': case 'forbidden': return '連不上辨識服務。請確認有網路，並用 Safari 或 Chrome 直接開啟這個網頁；有些 App 裡的預覽畫面會擋掉連線。';
+    default: return '辨識服務傳回的結果讀不懂，請再按一次「重新辨識」。';
+  }
+}
+
+// Gemini's rows → table rows. Drops a total line if one slipped through; lines after it count as additions.
+function toRows(recipe){
+  const out = [];
+  let base = 0, afterTotal = false;
+  for (const r of (recipe && recipe.rows) || []){
+    const name = String(r.name == null ? '' : r.name).trim();
+    const pct = typeof r.percent === 'number' && isFinite(r.percent) ? r.percent : null;
+    if (TOTAL_RE.test(name.replace(/[\s:：=＝]/g, ''))){ afterTotal = true; continue; }
+    const add = !!r.additive || afterTotal;
+    if (!add && pct != null && out.length >= 2 && base >= 95 && base <= 105 && Math.abs(pct - base) < .51){ afterTotal = true; continue; }
+    if (!name && pct == null) continue;
+    if (!add && pct != null) base += pct;
+    const unsure = !!r.uncertain || pct == null;
+    out.push({ name, pct: pct == null ? '' : fmtPct(pct), add, unsure, nameUnsure: unsure || !name || name.includes('□') });
+  }
+  return out;
+}
+
+function renderPicker(){
+  pickerEl.textContent = '';
+  pickerEl.hidden = recipes.length < 2;
+  if (recipes.length < 2) return;
+  recipes.forEach((r, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = (r.title || '').trim() || '配方 ' + (i + 1);
+    b.setAttribute('aria-pressed', String(i === recipeIdx));
+    b.addEventListener('click', () => { if (!busy && i !== recipeIdx) showRecipe(i); });
+    pickerEl.appendChild(b);
+  });
+}
+function showRecipe(i){
+  recipeIdx = i;
+  const rows = toRows(recipes[i]);
+  titleIn.value = (recipes[i].title || '').trim();
+  setRows(rows);
+  [...pickerEl.children].forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+  const unsure = rows.filter(r => r.unsure || r.nameUnsure).length;
+  const base = rows.filter(r => !r.add).reduce((a, r) => a + num(r.pct), 0);
+  const off = base > 0 && Math.abs(base - 100) > .5;
+  let msg = (recipes.length > 1 ? '這張圖有 ' + recipes.length + ' 個配方，點下方的配方名稱可以切換。' : '') + '找到 ' + rows.length + ' 種原料。';
+  if (unsure) msg += '有 ' + unsure + ' 列看不太清楚，已用橘色標出。';
+  if (off) msg += '基礎釉加總是 ' + fmtPct(base) + '，不是 100，可能有數字讀錯。';
+  if (unsure || off) msg += '點縮圖可以對照原圖。';
+  setStatus(msg);
+}
+
+async function recognize(){
+  if (!srcImg || busy) return;
+  setBusy(true); setStatus('');
+  pickerEl.hidden = true;
+  startBar();
+  try {
+    await frame();
+    const b64 = prepImage(srcImg, sel);
+    P.range(.02, .1, 1);
+    P.range(.1, .95, 0, .012);   // Gemini gives no progress; creep forward while we wait
+    const data = await askGemini(b64);
+    const list = (data.recipes || []).filter(r => r && Array.isArray(r.rows) && r.rows.length);
+    P.finish();
+    if (!list.length){
+      setStatus(sel
+        ? '框選的範圍裡沒找到配方。可以換個範圍再試，或直接在表格輸入。'
+        : '圖裡沒找到配方。按「框選範圍」只框配方的部分再試一次，或直接在表格輸入。', true);
+      return;
+    }
+    recipes = list; recipeIdx = 0;
+    renderPicker();
+    showRecipe(0);
+  } catch (err){
+    P.fail();
+    console.error(err);
+    setStatus(errorText(err), true);
+  } finally {
+    setBusy(false);
+  }
+}
+
+/* ================= image input ================= */
+function decodeImage(url){
+  return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url; });
+}
+function withTimeout(p, ms, code){
+  return new Promise((res, rej) => {
+    const t = setTimeout(() => rej(new Error(code)), ms);
+    p.then(v => { clearTimeout(t); res(v); }, e => { clearTimeout(t); rej(e); });
+  });
+}
+
+/* ---- HEIC: Safari opens it by itself; other browsers get a decoder, loaded only when needed ---- */
+const HEIC_LIB = 'https://cdn.jsdelivr.net/npm/heic-to@1.5.2/dist/iife/heic-to.js';
+const HEIF_BRANDS = /^(heic|heix|hevc|hevx|heim|heis|hevm|hevs|mif1|msf1|mif2)$/;
+async function looksLikeHeif(file){
+  if (/\.(heic|heif|hif)$/i.test(file.name || '') || /hei[cf]/i.test(file.type || '')) return true;
+  try {
+    const b = new Uint8Array(await file.slice(0, 64).arrayBuffer());
+    const at = i => String.fromCharCode(b[i], b[i + 1], b[i + 2], b[i + 3]);
+    if (b.length < 16 || at(4) !== 'ftyp' || /^avi[fs]$/.test(at(8))) return false;
+    const end = Math.min(b.length, ((b[0] << 24 | b[1] << 16 | b[2] << 8 | b[3]) >>> 0) || b.length);
+    for (let i = 8; i + 4 <= end; i += 4){ if (i !== 12 && HEIF_BRANDS.test(at(i))) return true; }
+  } catch (e) {}
+  return false;
+}
+let heicLibP = null;
+function loadHeicLib(){
+  if (window.HeicTo) return Promise.resolve(window.HeicTo);
+  if (!heicLibP){
+    heicLibP = new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = HEIC_LIB; s.async = true;
+      s.onload = () => window.HeicTo ? res(window.HeicTo) : rej(new Error('HEICLIB'));
+      s.onerror = () => rej(new Error('HEICLIB'));
+      document.head.appendChild(s);
+    }).catch(e => { heicLibP = null; throw e; });
+  }
+  return heicLibP;
+}
+async function heicToJpeg(file){
+  const HeicTo = await withTimeout(loadHeicLib(), 60000, 'HEICLIB');
+  try {
+    return await withTimeout(HeicTo({ blob: file, type: 'image/jpeg', quality: .92 }), 90000, 'HEICSLOW');
+  } catch (e){
+    throw new Error(String(e && e.message || e) === 'HEICSLOW' ? 'HEICSLOW' : 'HEICFAIL');
+  }
+}
+
+function showLoaded(url){
+  if (url){ thumbImg.src = url; thumbImg.hidden = false; }
+  else { thumbImg.removeAttribute('src'); thumbImg.hidden = true; }
+  dropBtn.hidden = true; loadedEl.hidden = false;
+}
+async function loadFile(file){
+  if (!file) return;
+  if (busy){ setStatus('上一張還在辨識，完成後再換。'); return; }
+  const prevUrl = srcUrl, hadImage = !!srcImg;
+  setBusy(true);
+  showLoaded(null); markEl.hidden = true;
+  setStatus('');
+  startBar();
+  let url = URL.createObjectURL(file), img = null, err = 'DECODE';
+  try { img = await decodeImage(url); }
+  catch (e){
+    URL.revokeObjectURL(url); url = null;
+    if (await looksLikeHeif(file)){
+      P.range(.02, .14, 0, .012);
+      try {
+        url = URL.createObjectURL(await heicToJpeg(file));
+        img = await decodeImage(url);
+      } catch (e2){
+        if (url) URL.revokeObjectURL(url);
+        url = null; img = null;
+        err = String(e2 && e2.message || e2);
+      }
+    }
+  }
+  if (!img){
+    P.fail(); setBusy(false);
+    if (hadImage) { showLoaded(prevUrl); updateMark(); }
+    else { loadedEl.hidden = true; dropBtn.hidden = false; }
+    setStatus(
+      err === 'HEICLIB' ? 'HEIC 轉換工具沒有載入成功，請確認網路後再試一次。' :
+      err === 'HEICSLOW' ? 'HEIC 轉換太久沒有完成，照片可能太大。可以改用截圖，或換一張試試。' :
+      err === 'HEICFAIL' ? '這張 HEIC 照片解不開。可以改用截圖，或在 iPhone「設定 > 相機 > 格式」選「最相容」，之後拍的照片就會是 JPG。' :
+      '這個檔案讀不出來，請換一張照片或截圖試試。', true);
+    return;
+  }
+  if (prevUrl) URL.revokeObjectURL(prevUrl);
+  srcUrl = url; srcImg = img; sel = null;
+  vImg.src = url; showLoaded(url);
+  setBusy(false);
+  recognize();
+}
+function openPicker(){ fileIn.value = ''; fileIn.click(); }
+dropBtn.addEventListener('click', openPicker);
+swapBtn.addEventListener('click', openPicker);
+rerunBtn.addEventListener('click', recognize);
+fileIn.addEventListener('change', () => loadFile(fileIn.files && fileIn.files[0]));
+const readSec = $('#read');
+const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+['dragenter', 'dragover'].forEach(t => readSec.addEventListener(t, e => { if (hasFiles(e)){ e.preventDefault(); dropBtn.classList.add('over'); } }));
+['dragleave', 'drop'].forEach(t => readSec.addEventListener(t, () => dropBtn.classList.remove('over')));
+readSec.addEventListener('drop', e => {
+  if (!hasFiles(e)) return;
+  e.preventDefault();
+  const files = [...e.dataTransfer.files];
+  loadFile(files.find(f => /^image\//.test(f.type) || /\.(heic|heif|hif)$/i.test(f.name || '')) || files[0]);
+});
+document.addEventListener('paste', e => {
+  const it = [...(e.clipboardData && e.clipboardData.items || [])].find(i => i.kind === 'file' && i.type.startsWith('image/'));
+  if (it){ e.preventDefault(); loadFile(it.getAsFile()); }
+});
+parseBtn.addEventListener('click', () => {
+  const items = parseRecipe(rawTa.value);
+  if (items.length){ recipes = []; pickerEl.hidden = true; setRows(items); setStatus('解析出 ' + items.length + ' 項原料。'); }
+  else setStatus('沒解析到內容。每行寫成「原料 數字」，例如「長石 45」。', true);
+});
+
+/* ================= viewer + crop ================= */
+let lastFocus = null, drag = null;
+function drawSel(){
+  if (!sel) selEl.hidden = true;
+  else {
+    selEl.hidden = false;
+    selEl.style.left = sel.x * 100 + '%'; selEl.style.top = sel.y * 100 + '%';
+    selEl.style.width = sel.w * 100 + '%'; selEl.style.height = sel.h * 100 + '%';
+  }
+  vRun.disabled = !sel || busy; vClear.disabled = !sel;
+}
+function updateMark(){
+  if (!sel || !srcImg){ markEl.hidden = true; return; }
+  const B = thumbBtn.clientWidth || 78, W = srcImg.naturalWidth, H = srcImg.naturalHeight;
+  const s = Math.max(B / W, B / H), dw = W * s, dh = H * s, ox = (B - dw) / 2, oy = (B - dh) / 2;
+  markEl.hidden = false;
+  markEl.style.left = ox + sel.x * dw + 'px'; markEl.style.top = oy + sel.y * dh + 'px';
+  markEl.style.width = sel.w * dw + 'px'; markEl.style.height = sel.h * dh + 'px';
+}
+function openViewer(){
+  if (!srcImg || thumbImg.hidden) return;
+  lastFocus = document.activeElement;
+  viewer.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  drawSel();
+  vClose.focus();
+}
+function closeViewer(){
+  viewer.hidden = true;
+  document.documentElement.style.overflow = '';
+  updateMark();
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+thumbBtn.addEventListener('click', openViewer);
+thumbImg.addEventListener('error', () => { thumbImg.hidden = true; });
+cropBtn.addEventListener('click', openViewer);
+vClose.addEventListener('click', closeViewer);
+viewer.addEventListener('keydown', e => { if (e.key === 'Escape') closeViewer(); });
+vClear.addEventListener('click', () => { sel = null; drawSel(); });
+vRun.addEventListener('click', () => { closeViewer(); recognize(); });
+function relPoint(e){
+  const r = vImg.getBoundingClientRect();
+  return { x: clamp01((e.clientX - r.left) / r.width), y: clamp01((e.clientY - r.top) / r.height), r };
+}
+stage.addEventListener('pointerdown', e => {
+  if (busy || e.button > 0 || !vImg.getBoundingClientRect().width) return;
+  const p = relPoint(e);
+  drag = { id: e.pointerId, x0: p.x, y0: p.y, prev: sel };
+  try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+  sel = { x: p.x, y: p.y, w: 0, h: 0 };
+  drawSel();
+  e.preventDefault();
+});
+stage.addEventListener('pointermove', e => {
+  if (!drag || e.pointerId !== drag.id) return;
+  const p = relPoint(e);
+  sel = { x: Math.min(drag.x0, p.x), y: Math.min(drag.y0, p.y), w: Math.abs(p.x - drag.x0), h: Math.abs(p.y - drag.y0) };
+  drawSel();
+});
+function endDrag(e){
+  if (!drag || e.pointerId !== drag.id) return;
+  const r = vImg.getBoundingClientRect();
+  if (!sel || sel.w * r.width < 14 || sel.h * r.height < 14) sel = drag.prev;
+  drag = null;
+  drawSel();
+}
+stage.addEventListener('pointerup', endDrag);
+stage.addEventListener('pointercancel', endDrag);
+
+/* ================= table + math ================= */
+function num(v){ const n = parseFloat(String(v).trim().replace(',', '.')); return isFinite(n) ? n : 0; }
+function fmtPct(n){ return String(+(+n).toFixed(2)); }
+function addRow(it){
+  it = Object.assign({ name: '', pct: '', add: false, unsure: false, nameUnsure: false }, it || {});
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td class="c-name"><input type="text" class="name" list="materials" aria-label="原料名稱" autocomplete="off"></td>' +
+    '<td class="c-pct"><input type="text" class="pct" inputmode="decimal" aria-label="百分比" autocomplete="off"></td>' +
+    '<td class="c-add"><input type="checkbox" class="add" aria-label="外加"></td>' +
+    '<td class="g"></td>' +
+    '<td class="c-x"><button type="button" aria-label="刪除這一列">×</button></td>';
+  const nameIn = tr.querySelector('.name'), pctIn = tr.querySelector('.pct');
+  const nameTd = tr.querySelector('.c-name'), pctTd = tr.querySelector('.c-pct');
+  nameIn.value = it.name || '';
+  pctIn.value = it.pct === '' || it.pct == null ? '' : String(it.pct);
+  tr.querySelector('.add').checked = !!it.add;
+  pctTd.classList.toggle('unsure', !!it.unsure);
+  nameTd.classList.toggle('unsure', !!it.nameUnsure);
+  pctIn.addEventListener('input', () => pctTd.classList.remove('unsure'));
+  nameIn.addEventListener('input', () => nameTd.classList.remove('unsure'));
+  tr.addEventListener('input', calc);
+  tr.addEventListener('change', calc);
+  tr.querySelector('.c-x button').addEventListener('click', () => { tr.remove(); calc(); });
+  rowsEl.appendChild(tr);
+}
+function setRows(items){ rowsEl.textContent = ''; items.forEach(addRow); calc(); }
+function readRows(){
+  return [...rowsEl.rows].map(tr => ({
+    name: tr.querySelector('.name').value, pct: tr.querySelector('.pct').value, add: tr.querySelector('.add').checked,
+    unsure: tr.querySelector('.c-pct').classList.contains('unsure'), nameUnsure: tr.querySelector('.c-name').classList.contains('unsure')
+  }));
+}
+function fitTarget(){ targetIn.style.width = Math.max(2, targetIn.value.length) + .4 + 'ch'; }
+function calc(){
+  fitTarget();
+  const W = num(targetIn.value), dp = +dpSel.value;
+  const rows = [...rowsEl.rows].map(tr => ({ tr, pct: num(tr.querySelector('.pct').value), add: tr.querySelector('.add').checked }));
+  const base = rows.filter(r => !r.add).reduce((a, r) => a + r.pct, 0);
+  const all = rows.reduce((a, r) => a + r.pct, 0);
+  const denom = modeSel.value === 'base' ? base : all;
+  let total = 0;
+  rows.forEach(r => {
+    r.tr.classList.toggle('is-add', r.add);
+    const ok = r.pct > 0 && W > 0 && denom > 0;
+    const g = ok ? r.pct / denom * W : 0;
+    total += g;
+    r.tr.querySelector('.g').textContent = ok ? g.toFixed(dp) : '—';
+  });
+  sumPct.textContent = rows.length ? fmtPct(base) : '';
+  sumAdd.textContent = all - base > 0 ? '+' + fmtPct(all - base) : '';
+  sumG.textContent = total > 0 ? total.toFixed(dp) : '';
+  const msgs = [];
+  const unsure = [...rowsEl.rows].filter(tr => tr.querySelector('td.unsure')).length;
+  if (unsure) msgs.push('有 ' + unsure + ' 列看不太清楚（橘色），' + (srcImg ? '請點上方縮圖對照原圖。' : '請對照原本的筆記。'));
+  if (rows.length && modeSel.value === 'base' && base === 0 && all > 0) msgs.push('所有原料都標成外加，基礎釉是 0，沒辦法換算。');
+  else if (rows.length && base > 0 && Math.abs(base - 100) > .5) msgs.push('基礎釉加總是 ' + fmtPct(base) + '，不是 100，已按比例換算。');
+  warnEl.textContent = msgs.join('');
+  updateCopy();
+  chips.forEach(b => b.setAttribute('aria-pressed', String(num(b.dataset.g) === W)));
+  save();
+}
+targetIn.addEventListener('input', calc);
+titleIn.addEventListener('input', () => { updateCopy(); save(); });
+modeSel.addEventListener('change', calc);
+dpSel.addEventListener('change', calc);
+chips.forEach(b => b.addEventListener('click', () => { targetIn.value = b.dataset.g; calc(); }));
+$('#addRow').addEventListener('click', () => { addRow(); calc(); rowsEl.lastElementChild.querySelector('.name').focus(); });
+$('#clearBtn').addEventListener('click', () => {
+  if (rowsEl.rows.length && !confirm('要清空所有原料嗎？')) return;
+  rowsEl.textContent = ''; calc();
+});
+
+/* ================= save the weighing sheet as a picture ================= */
+const saveBtn = $('#saveBtn'), status2 = $('#status2');
+const sheetEl = $('#sheet'), sImg = $('#sImg'), sClose = $('#sClose'), sShare = $('#sShare'), sDownload = $('#sDownload');
+let sheetUrl = null, sheetFile = null, sheetFocus = null;
+function setStatus2(msg, isError){ status2.textContent = msg || ''; status2.classList.toggle('error', !!isError); }
+async function renderSheet(){
+  const Wt = num(targetIn.value), title = titleIn.value.trim();
+  const items = [...rowsEl.rows].map(tr => ({
+    name: tr.querySelector('.name').value.trim(), pct: tr.querySelector('.pct').value.trim(),
+    add: tr.querySelector('.add').checked, g: tr.querySelector('.g').textContent
+  })).filter(r => r.name && r.g !== '—');
+  if (!items.length) throw new Error('EMPTY');
+  const disp = "'Shippori Mincho B1','Noto Serif TC','Songti TC',serif", body = "'Noto Serif TC','Songti TC','Noto Serif CJK TC',serif";
+  const text = '釉藥秤料基礎釉所有原料合計要秤外加%g+0123456789.' + title + items.map(r => r.name).join('');
+  try {
+    await Promise.all([document.fonts.load('700 64px ' + disp, '釉藥秤料'), document.fonts.load('400 30px ' + body, text), document.fonts.load('600 38px ' + body, text)]);
+  } catch (e) {}
+  const S = 1080, PAD = 80, GAP = 22, ROW = 48, nameW = S - PAD * 2 - 340;
+  const TOP = 262;
+  const H = TOP + 60 + items.length * (ROW + GAP * 2) + 110 + PAD;
+  const c = document.createElement('canvas');
+  c.width = S; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#FAF9F5'; ctx.fillRect(0, 0, S, H);
+  // title, set like hand-placed type
+  ctx.fillStyle = '#141413'; ctx.font = '700 66px ' + disp;
+  const jit = [[-.4, .6, .95], [.5, -.4, .9], [-.2, .3, 1], [.6, .8, .9]];
+  let x = PAD;
+  [...'釉藥秤料'].forEach((ch, i) => {
+    ctx.save(); ctx.globalAlpha = jit[i][2]; ctx.translate(x, PAD + 66 + jit[i][1]); ctx.rotate(jit[i][0] * Math.PI / 180);
+    ctx.fillText(ch, 0, 0); ctx.restore();
+    x += ctx.measureText(ch).width + 8;
+  });
+  ctx.globalAlpha = 1;
+  ctx.font = '400 30px ' + body; ctx.fillStyle = '#5E5D59';
+  ctx.fillText((title ? title + '　' : '') + (modeSel.value === 'base' ? '基礎釉 ' : '所有原料合計 ') + fmtPct(Wt) + ' g', PAD, PAD + 126, S - PAD * 2 - 230);
+  const d = new Date();
+  ctx.textAlign = 'right'; ctx.fillText(d.getFullYear() + '.' + pad2(d.getMonth() + 1) + '.' + pad2(d.getDate()), S - PAD, PAD + 126);
+  // header
+  let y = TOP;
+  ctx.font = '400 26px ' + body;
+  ctx.textAlign = 'left'; ctx.fillText('原料', PAD, y + 34);
+  ctx.textAlign = 'right'; ctx.fillText('%', S - PAD - 250, y + 34); ctx.fillText('要秤 g', S - PAD, y + 34);
+  y += 60;
+  ctx.fillStyle = '#141413'; ctx.fillRect(PAD, y - 2, S - PAD * 2, 2);
+  items.forEach(r => {
+    const y0 = y + GAP, mid = y0 + ROW / 2;
+    ctx.textAlign = 'left'; ctx.fillStyle = '#141413';
+    ctx.font = '400 32px ' + body; ctx.fillText(r.name, PAD, mid + 11, nameW);
+    if (r.add){ ctx.fillStyle = '#D97757'; ctx.fillRect(PAD - 24, y0, 5, ROW); }
+    ctx.textAlign = 'right'; ctx.fillStyle = '#141413';
+    ctx.font = '400 32px ' + body; ctx.fillText((r.add ? '+' : '') + r.pct, S - PAD - 250, mid + 11);
+    ctx.font = '600 40px ' + body; ctx.fillText(r.g, S - PAD, mid + 14);
+    y = y0 + ROW + GAP;
+    ctx.fillStyle = '#E3DFD5'; ctx.fillRect(PAD, y - 1, S - PAD * 2, 1);
+  });
+  ctx.fillStyle = '#141413'; ctx.fillRect(PAD, y, S - PAD * 2, 2);
+  ctx.font = '600 34px ' + body;
+  ctx.textAlign = 'left'; ctx.fillText('合計', PAD, y + 64);
+  ctx.textAlign = 'right'; ctx.font = '600 40px ' + body; ctx.fillText(sumG.textContent, S - PAD, y + 66);
+  return new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('toBlob')), 'image/png'));
+}
+function openSheet(){
+  sheetFocus = document.activeElement;
+  sheetEl.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  sClose.focus();
+}
+function closeSheet(){
+  sheetEl.hidden = true;
+  document.documentElement.style.overflow = '';
+  if (sheetFocus && sheetFocus.focus) sheetFocus.focus();
+}
+saveBtn.addEventListener('click', async () => {
+  saveBtn.disabled = true; setStatus2('');
+  try {
+    const blob = await renderSheet();
+    if (sheetUrl) URL.revokeObjectURL(sheetUrl);
+    sheetUrl = URL.createObjectURL(blob);
+    const d = new Date();
+    const name = '釉藥秤料-' + d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '-' + pad2(d.getHours()) + pad2(d.getMinutes()) + '.png';
+    sheetFile = new File([blob], name, { type: 'image/png' });
+    sImg.src = sheetUrl;
+    sDownload.href = sheetUrl; sDownload.download = name;
+    let canShare = false;
+    try { canShare = !!(navigator.canShare && navigator.canShare({ files: [sheetFile] })); } catch (e) {}
+    sShare.hidden = !canShare;
+    sDownload.classList.toggle('primary', !canShare);
+    openSheet();
+  } catch (e){
+    setStatus2(e.message === 'EMPTY' ? '表格裡還沒有可以存的原料。' : '圖片沒有產生成功：' + e.message, true);
+  } finally { saveBtn.disabled = false; }
+});
+sShare.addEventListener('click', async () => {
+  try { await navigator.share({ files: [sheetFile], title: '釉藥秤料' }); } catch (e) {}
+});
+sClose.addEventListener('click', closeSheet);
+sheetEl.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+/* ================= the same sheet as plain text, for pasting into notes ================= */
+const copyBox = $('#copyBox'), copyTa = $('#copyText'), copyBtn = $('#copyBtn');
+let copyT = 0;
+// Line the columns up with fixed-width spaces, so they stay aligned after pasting elsewhere.
+// U+3000 is one Chinese character wide; the others are fractions of it. Each pad is chosen by measuring
+// the whole line so far in the page's own font, so kerning and rounding never add up along a line.
+let measureCtx = null, measureFont = '', widthCache = new Map(), padWidths = null;
+function emWidth(str){
+  const font = '400 100px ' + getComputedStyle(copyTa).fontFamily;
+  if (!measureCtx) measureCtx = document.createElement('canvas').getContext('2d');
+  if (font !== measureFont){ measureFont = font; measureCtx.font = font; widthCache = new Map(); padWidths = null; }
+  let w = widthCache.get(str);
+  if (w === undefined){ w = measureCtx.measureText(str).width / 100; widthCache.set(str, w); }
+  return w;
+}
+const FINE_SPACES = ['\u2002', '\u2004', '\u2005', '\u2006', '\u2009', '\u200A'];
+const FINE_PADS = [''].concat(FINE_SPACES, ...FINE_SPACES.map(a => FINE_SPACES.map(b => a + b)));
+function padBetween(before, after, targetEnd){
+  const need = targetEnd - emWidth(before + after);
+  if (need <= .02) return '';
+  const W = emWidth('\u3000') || 1, whole = Math.floor(need / W);
+  if (!padWidths) padWidths = FINE_PADS.map(f => [f, emWidth(f)]);
+  // shortlist by simple addition, then measure the few closest for real (kerning, rounding)
+  const cands = [];
+  for (let k = Math.max(0, whole - 1); k <= whole + 1; k++)
+    for (const [f, fw] of padWidths) cands.push(['\u3000'.repeat(k) + f, Math.abs(k * W + fw - need)]);
+  cands.sort((a, b) => a[1] - b[1]);
+  let best = '', err = Infinity;
+  for (const [pad] of cands.slice(0, 5)){
+    const e = Math.abs(emWidth(before + pad + after) - targetEnd);
+    if (e < err){ err = e; best = pad; }
+  }
+  return best;
+}
+function sheetText(){
+  const rows = [...rowsEl.rows].map(tr => ({
+    name: tr.querySelector('.name').value.trim(), pct: num(tr.querySelector('.pct').value),
+    add: tr.querySelector('.add').checked, g: tr.querySelector('.g').textContent
+  })).filter(r => r.name && r.g !== '—');
+  if (!rows.length) return '';
+  const d = new Date(), title = titleIn.value.trim();
+  const lines = [];
+  if (title) lines.push(title);
+  lines.push((modeSel.value === 'base' ? '基礎釉 ' : '所有原料合計 ') + fmtPct(num(targetIn.value)) + ' g（' + d.getFullYear() + '.' + pad2(d.getMonth() + 1) + '.' + pad2(d.getDate()) + '）', '');
+  const cells = rows.map(r => ({ add: r.add, name: r.name, pct: fmtPct(r.pct), g: r.g }))
+    .concat([{ add: false, name: '合計', pct: fmtPct(rows.reduce((a, r) => a + r.pct, 0)), g: sumG.textContent }]);
+  const gap = emWidth('\u3000');
+  const blank = padBetween('', '', emWidth('＋')) || '\u3000';
+  // names start after a "＋" or an equally wide blank
+  cells.forEach(c => { c.s = (c.add ? '＋' : blank) + c.name; });
+  // percentages end at one shared position, then "%"
+  const pctEnd = Math.max(...cells.map(c => emWidth(c.s) + gap + emWidth(c.pct)));
+  cells.forEach(c => { c.s += padBetween(c.s, c.pct, pctEnd) + c.pct + '%'; });
+  // grams end at one shared position, then " g"
+  const gEnd = Math.max(...cells.map(c => emWidth(c.s) + gap + emWidth(c.g)));
+  cells.forEach(c => { c.s += padBetween(c.s, c.g, gEnd) + c.g + ' g'; });
+  cells.slice(0, -1).forEach(c => lines.push(c.s));
+  lines.push('', cells[cells.length - 1].s);
+  return lines.join('\n');
+}
+// Only worked out while the box is open (or right before copying), so typing in the table stays light.
+function updateCopy(){
+  if (!copyBox.open) return;
+  const t = sheetText();
+  copyTa.value = t;
+  copyTa.rows = Math.max(2, t ? t.split('\n').length : 2);
+  copyBtn.disabled = !t;
+}
+copyBox.addEventListener('toggle', () => { if (copyBox.open) updateCopy(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateCopy);
+copyBtn.addEventListener('click', async () => {
+  updateCopy();
+  const t = copyTa.value;
+  if (!t) return;
+  let ok = false;
+  try { await navigator.clipboard.writeText(t); ok = true; } catch (e) {}
+  if (!ok){
+    try { copyTa.focus(); copyTa.setSelectionRange(0, t.length); ok = document.execCommand('copy'); } catch (e) {}
+  }
+  copyBtn.textContent = ok ? '已複製' : '請長按上面的文字自己複製';
+  clearTimeout(copyT);
+  copyT = setTimeout(() => { copyBtn.textContent = '複製'; }, 2000);
+});
+
+/* ================= remember the last recipe on this device ================= */
+const KEY = 'glaze-calc-v5';
+function save(){
+  const d = { rows: readRows(), target: targetIn.value, mode: modeSel.value, dp: dpSel.value, title: titleIn.value };
+  try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+}
+function restore(){
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (!d || !Array.isArray(d.rows)) return false;
+    if (d.target != null) targetIn.value = d.target;
+    if (d.mode) modeSel.value = d.mode;
+    if (d.dp != null) dpSel.value = d.dp;
+    if (typeof d.title === 'string') titleIn.value = d.title;
+    d.rows.forEach(addRow);
+    return true;
+  } catch (e){ return false; }
+}
+window.addEventListener('resize', () => { if (!viewer.hidden) drawSel(); });
+
+if (!restore()){
+  [{ name: '長石', pct: 45 }, { name: '矽石', pct: 25 }, { name: '碳酸鈣', pct: 20 }, { name: '高嶺土', pct: 10 }, { name: '氧化鐵', pct: 5, add: true }].forEach(addRow);
+}
+calc();
+})();
+
+</script>
+</body>
+</html>
